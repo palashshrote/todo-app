@@ -1,37 +1,55 @@
+import { useEffect, useState } from "react";
 import List from "./List";
 
 export default function ListView({
   tasks,
   handleToggleComplete,
   handleRemoveTask,
+  readyForEdit,
 }) {
-  var ongoingTasks = tasks.filter(
-    (task) => task.completed === false && Date.parse(task.deadline) > Date.now()
-  );
-  var deadlineCrossed = tasks.filter(
-    (task) => Date.parse(task.deadline) < Date.now() && task.completed === false
-  );
+  const [tick, setTick] = useState(0); // dummy state to trigger re-render
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setTick((prev) => prev + 1);
+    }, 1000 * 60); // check every 1 minute (adjust as needed)
+
+    return () => clearInterval(interval); // cleanup
+  }, []);
+
+  const ongoingTasks = tasks
+    .filter(
+      (task) =>
+        task.status === "ongoing" && Date.parse(task.deadline) > Date.now()
+    )
+    .sort((a, b) => Date.parse(a.deadline) - Date.parse(b.deadline));
+  const deadlineCrossed = tasks
+    .filter(
+      (task) =>
+        Date.parse(task.deadline) < Date.now() && task.status === "ongoing"
+    )
+    .sort((a, b) => Date.parse(a.deadline) - Date.parse(b.deadline));
 
   return (
     <div className="list">
       {/* Deadline crossed */}
       <List
-        type={"dlCrossed"}
+        readyForEdit={readyForEdit}
         tasks={deadlineCrossed}
         handleToggleComplete={handleToggleComplete}
         handleRemoveTask={handleRemoveTask}
       />
       {/* Ongoing */}
       <List
-        type={"ongoing"}
+        readyForEdit={readyForEdit}
         tasks={ongoingTasks}
         handleToggleComplete={handleToggleComplete}
         handleRemoveTask={handleRemoveTask}
       />
       {/* Completed */}
       <List
-        type={"completed"}
-        tasks={tasks.filter((task) => task.completed === true)}
+        readyForEdit={readyForEdit}
+        tasks={tasks.filter((task) => task.status === "success")}
         handleToggleComplete={handleToggleComplete}
         handleRemoveTask={handleRemoveTask}
       />
