@@ -1,12 +1,21 @@
-# React + Vite
+# 📝 Todo App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A dynamic task management app built utilizing **React.js**, featuring:
 
-Currently, two official plugins are available:
+- Real-time deadline tracking ⏰
+- Automatic transition between **Ongoing**, **Deadline Crossed**, and **Completed**
+- Task editing, deleting, and marking as done ✅
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+---
 
-## Expanding the ESLint configuration
+## 📸 Features
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- ✍️ **Add Tasks** with title, description, and deadline
+- 🕒 **Live status transition** based on deadline
+- 🔁 **Edit Tasks** inline
+- ✅ **Toggle completion status**
+- 🗑️ **Remove Tasks**
+- 📆 Deadline-based categories:
+  - **Ongoing**: Tasks not yet due
+  - **Deadline Crossed**: Tasks that missed the deadline and are not completed
+  - **Completed**: Tasks marked as done (with info on whether early or late)
