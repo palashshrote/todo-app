@@ -31,9 +31,10 @@ export default function ListView({
     .sort((a, b) => Date.parse(a.deadline) - Date.parse(b.deadline));
 
   return (
-    <div className="list">
+    <div className="list-view">
       {/* Deadline crossed */}
       <List
+        type="Deadline Crossed"
         readyForEdit={readyForEdit}
         tasks={deadlineCrossed}
         handleToggleComplete={handleToggleComplete}
@@ -41,6 +42,7 @@ export default function ListView({
       />
       {/* Ongoing */}
       <List
+        type="Ongoing"
         readyForEdit={readyForEdit}
         tasks={ongoingTasks}
         handleToggleComplete={handleToggleComplete}
@@ -48,6 +50,7 @@ export default function ListView({
       />
       {/* Completed */}
       <List
+        type="Completed"
         readyForEdit={readyForEdit}
         tasks={tasks.filter((task) => task.status === "success")}
         handleToggleComplete={handleToggleComplete}

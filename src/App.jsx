@@ -36,7 +36,7 @@ const initialTasks = [
     title: "Print",
     description: "Doc",
     status: "ongoing",
-    deadline: "2025-07-02T23:12:00",
+    deadline: "2025-07-03T23:12:00",
     createdAt: "2025-07-01T05:00:00",
     updatedAt: "2025-07-01T05:00:00",
   },

@@ -40,19 +40,27 @@ export default function Form({ onAddNewTask, onEditTask, edit, taskToEdit }) {
     setNewDeadline("");
   }
   return (
-    <form onSubmit={handleFormSubmission}>
+    <form className="form-input" onSubmit={handleFormSubmission}>
       <input
         value={taskTitle}
         placeholder="Enter title"
         type="text"
         onChange={(e) => setTaskTitle(e.target.value)}
       />
-      <input
+      {/* <input
         value={taskDescription}
         onChange={(e) => setTaskDescription(e.target.value)}
         type="text"
         placeholder="Enter description..."
+      /> */}
+      <textarea
+        value={taskDescription}
+        onChange={(e) => setTaskDescription(e.target.value)}
+        placeholder="Enter description..."
+        rows={4} // you can adjust this
+        style={{ resize: "vertical", width: "100%" }}
       />
+
       <input
         value={newDeadline}
         onChange={(e) => setNewDeadline(e.target.value)}
