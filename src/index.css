@@ -30,6 +30,7 @@ header > h2 {
 }
 .input-deadline {
   display: flex;
+  justify-content: center;
   flex-wrap: wrap;
   gap: 2rem;
 }
@@ -105,8 +106,10 @@ li {
 }
 
 .task-card {
+  position: relative;
+  transition: background 0.3s ease;
+  overflow: hidden;
   width: 30rem; /* fixed width */
-  /* rest of your styles */
   display: flex;
   align-items: flex-start;
   gap: 1rem;
@@ -116,9 +119,8 @@ li {
   border-radius: 1rem;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 
-  /* Let height grow */
   height: auto;
-  flex-direction: row; /* default */
+  flex-direction: row;
 }
 
 .task-controls {

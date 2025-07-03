@@ -12,6 +12,23 @@ export default function Form({ onAddNewTask, onEditTask, edit, taskToEdit }) {
       setNewDeadline(taskToEdit.deadline || "");
     }
   }, [edit, taskToEdit]);
+  function getISTDateTimeTFormat() {
+    const now = new Date();
+
+    // Get time in IST
+    const istTime = new Date(
+      now.toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+    );
+
+    const yyyy = istTime.getFullYear();
+    const mm = String(istTime.getMonth() + 1).padStart(2, "0");
+    const dd = String(istTime.getDate()).padStart(2, "0");
+    const hh = String(istTime.getHours()).padStart(2, "0");
+    const min = String(istTime.getMinutes()).padStart(2, "0");
+
+    return `${yyyy}-${mm}-${dd}T${hh}:${min}`;
+  }
+
   function handleFormSubmission(e) {
     e.preventDefault();
     // console.log(newTask, newDeadline);
@@ -21,7 +38,7 @@ export default function Form({ onAddNewTask, onEditTask, edit, taskToEdit }) {
         title: taskTitle,
         description: taskDescription,
         deadline: newDeadline,
-        updatedAt: Date.now().toString(),
+        updatedAt: getISTDateTimeTFormat(),
       };
       onEditTask(editPayload);
     } else {
@@ -30,8 +47,8 @@ export default function Form({ onAddNewTask, onEditTask, edit, taskToEdit }) {
         description: taskDescription,
         status: "ongoing",
         deadline: newDeadline,
-        createdAt: Date.now().toString(),
-        updatedAt: Date.now().toString(),
+        createdAt: getISTDateTimeTFormat(),
+        updatedAt: getISTDateTimeTFormat(),
       };
       onAddNewTask(taskPayload);
     }

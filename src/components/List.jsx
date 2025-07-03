@@ -98,13 +98,32 @@ export default function List({
   handleRemoveTask,
   readyForEdit,
 }) {
+  function getElapsedWidth(task) {
+    const now = new Date();
+    const start = new Date(task.createdAt);
+    const end = new Date(task.deadline);
+    const total = end - start;
+    const elapsed = now - start;
+
+    if (total <= 0) return 100; // fallback if invalid range
+
+    const percentage = Math.min((elapsed / total) * 100, 100); // clamp to 100%
+    return 100 - percentage;
+  }
   return (
     <div className="list-item">
       <h3>{tasks.length > 0 && type}</h3>
       <ul>
         {tasks.map((task) => (
           <li key={task.id}>
-            <div className="task-card">
+            <div
+              className="task-card"
+              style={{
+                background: `linear-gradient(to right, rgba(0, 128, 255, 0.2) ${getElapsedWidth(
+                  task
+                )}%, transparent ${getElapsedWidth(task)}%)`,
+              }}
+            >
               <div className="task-controls">
                 <input
                   type="checkbox"

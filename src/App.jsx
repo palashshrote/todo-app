@@ -9,49 +9,64 @@ const initialTasks = [
     title: "Yoga",
     description: "Practise yoga",
     status: "success",
-    deadline: "2025-07-03T07:00:00",
-    createdAt: "2025-07-03T05:00:00",
-    updatedAt: "2025-07-03T06:00:00",
+    deadline: "2025-07-03T07:00",
+    createdAt: "2025-07-03T05:00",
+    updatedAt: "2025-07-03T06:00",
   },
   {
     id: 2,
     title: "Badminton",
     description: "Smash the court",
     status: "ongoing",
-    deadline: "2025-07-03T22:00:00",
-    createdAt: "2025-07-03T05:00:00",
-    updatedAt: "2025-07-03T05:00:00",
+    deadline: "2025-07-03T22:00",
+    createdAt: "2025-07-03T05:00",
+    updatedAt: "2025-07-03T05:00",
   },
   {
     id: 3,
     title: "RUN",
     description: "Bring grocery",
     status: "ongoing",
-    deadline: "2025-07-03T17:00:00",
-    createdAt: "2025-07-03T05:00:00",
-    updatedAt: "2025-07-03T05:00:00",
+    deadline: "2025-07-03T17:00",
+    createdAt: "2025-07-03T05:00",
+    updatedAt: "2025-07-03T05:00",
   },
   {
     id: 4,
-    title: "Print",
-    description: "Doc",
+    title: "Print out",
+    description: "Course/Program outcomes",
     status: "ongoing",
-    deadline: "2025-07-02T23:12:00",
-    createdAt: "2025-07-01T05:00:00",
-    updatedAt: "2025-07-01T05:00:00",
+    deadline: "2025-07-02T23:12",
+    createdAt: "2025-07-01T05:00",
+    updatedAt: "2025-07-01T05:00",
   },
   {
     id: 5,
-    title: "De-assemble",
+    title: "Maintenance",
     description:
       "De-assemble cooler into parts for repair and clean the stack space of the cooler",
     status: "success",
-    deadline: "2025-07-02T10:12:00",
-    createdAt: "2025-07-01T05:00:00",
-    updatedAt: "2025-07-02T15:00:00",
+    deadline: "2025-07-02T10:12",
+    createdAt: "2025-07-01T05:00",
+    updatedAt: "2025-07-02T15:00",
   },
 ];
+function getISTDateTimeTFormat() {
+  const now = new Date();
 
+  // Get time in IST
+  const istTime = new Date(
+    now.toLocaleString("en-US", { timeZone: "Asia/Kolkata" })
+  );
+
+  const yyyy = istTime.getFullYear();
+  const mm = String(istTime.getMonth() + 1).padStart(2, "0");
+  const dd = String(istTime.getDate()).padStart(2, "0");
+  const hh = String(istTime.getHours()).padStart(2, "0");
+  const min = String(istTime.getMinutes()).padStart(2, "0");
+
+  return `${yyyy}-${mm}-${dd}T${hh}:${min}`;
+}
 export default function App() {
   const [tasks, setTasks] = useState(initialTasks);
   function addNewTask(newTask) {
@@ -75,7 +90,7 @@ export default function App() {
           return {
             ...task,
             status: updatedStatus,
-            updatedAt: Date.now().toString(),
+            updatedAt: getISTDateTimeTFormat(),
           };
         }
         return task;
