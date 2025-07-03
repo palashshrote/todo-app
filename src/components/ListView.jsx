@@ -33,6 +33,7 @@ export default function ListView({
   return (
     <div className="list-view">
       {/* Deadline crossed */}
+
       <List
         type="Deadline Crossed"
         readyForEdit={readyForEdit}

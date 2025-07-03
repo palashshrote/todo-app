@@ -4,7 +4,7 @@ export default function Form({ onAddNewTask, onEditTask, edit, taskToEdit }) {
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
   const [newDeadline, setNewDeadline] = useState("");
-
+  const [startDate, setStartDate] = useState(new Date());
   useEffect(() => {
     if (edit) {
       setTaskTitle(taskToEdit.title || "");
@@ -47,29 +47,23 @@ export default function Form({ onAddNewTask, onEditTask, edit, taskToEdit }) {
         type="text"
         onChange={(e) => setTaskTitle(e.target.value)}
       />
-      {/* <input
-        value={taskDescription}
-        onChange={(e) => setTaskDescription(e.target.value)}
-        type="text"
-        placeholder="Enter description..."
-      /> */}
+
       <textarea
+        className="task-textarea"
         value={taskDescription}
         onChange={(e) => setTaskDescription(e.target.value)}
         placeholder="Enter description..."
         rows={4} // you can adjust this
-        style={{ resize: "vertical", width: "100%" }}
       />
-
-      <input
-        value={newDeadline}
-        onChange={(e) => setNewDeadline(e.target.value)}
-        type="datetime-local"
-        id="myDateTime"
-        name="myDateTime"
-        placeholder="Set deadline"
-      />
-      <button type="submit">{edit ? "Save Changes" : "Add Task"}</button>
+      <div className="input-deadline">
+        <input
+          value={newDeadline}
+          onChange={(e) => setNewDeadline(e.target.value)}
+          type="datetime-local"
+          placeholder="Set deadline"
+        />
+        <button type="submit">{edit ? "Save Changes" : "Add Task"}</button>
+      </div>
     </form>
   );
 }

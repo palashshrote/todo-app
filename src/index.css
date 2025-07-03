@@ -2,7 +2,7 @@
 
 body {
   font-family: Onest, sans-serif;
-  font-size: 2rem;
+  font-size: 3rem;
   background-image: url("./assets/images/gray-abs2.jpg");
   color: rgb(34, 16, 64);
   /* color: rgb(71, 37, 73); */
@@ -11,49 +11,75 @@ body {
 .app {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 header {
-  font-size: 3rem;
+  text-align: center;
+  font-size: 4.5rem;
 }
-header > h1 {
+header > h2 {
   margin-top: 0.5rem;
-  margin-bottom: 1.5rem;
+  margin-bottom: 3rem;
 }
 .form-input {
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   gap: 2rem;
   flex-wrap: wrap;
 }
-select,
-input,
-textarea,
-button {
+.input-deadline {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+.task-textarea {
+  width: 35rem; /* Fixed width */
+  resize: vertical; /* Only allow vertical resizing */
   padding: 0.9rem 1.7rem;
-  font-size: 1.5rem;
+  font-size: 2rem;
   font-family: Onest;
   color: rgb(34, 16, 64);
   border-radius: 3rem;
-  border: none;
+
   cursor: pointer;
-}
-.list-view {
-  display: flex;
-
-  justify-content: space-between;
+  border: 2px solid black;
 }
 
-.list-item {
-  display: flex;
-  flex-direction: column;
-  /* text-align: center; */
+select,
+input,
+button {
+  padding: 1rem 2.5rem;
+  font-size: 2rem;
+  font-family: Onest;
+  color: rgb(34, 16, 64);
+  border-radius: 3rem;
+
+  cursor: pointer;
+  border: 2px solid black;
 }
-.list-item h2 {
-  text-align: center;
-  margin-bottom: 0px;
+.list-item button {
+  font-size: 1.3rem;
+  padding: 0.5rem 0.5rem;
+  border: none;
 }
+input[type="checkbox"] {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+input[type="checkbox"]:hover {
+  transform: scale(1.2);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+}
+form button:hover {
+  border: none;
+  background-color: rgb(139, 202, 139);
+}
+
 ul {
   margin: 0px;
   padding: 0px;
@@ -61,8 +87,26 @@ ul {
 li {
   list-style: none;
 }
+.list-view {
+  margin-top: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.list-item {
+  display: flex;
+  flex-direction: column;
+  /* text-align: center; */
+}
+.list-item h3 {
+  text-align: center;
+  margin-bottom: 0px;
+}
 
 .task-card {
+  width: 30rem; /* fixed width */
+  /* rest of your styles */
   display: flex;
   align-items: flex-start;
   gap: 1rem;
@@ -71,6 +115,10 @@ li {
   background: rgba(255, 255, 255, 0.7);
   border-radius: 1rem;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+
+  /* Let height grow */
+  height: auto;
+  flex-direction: row; /* default */
 }
 
 .task-controls {
@@ -86,10 +134,68 @@ li {
 
 .task-details p {
   margin: 0.5rem 0;
-  font-size: 1.3rem;
+  font-size: 2.3rem;
 }
 
 .task-details small {
-  font-size: 1rem;
+  font-size: 1.3rem;
   color: #333;
+}
+
+@media screen and (max-width: 1040px) {
+  body {
+    font-size: 2.5rem;
+  }
+  header {
+    font-size: 3.5rem;
+  }
+  .task-textarea {
+    width: 25rem;
+    font-size: 1.5rem;
+  }
+  select,
+  input,
+  button {
+    padding: 0.8rem 1.5rem;
+    font-size: 1.5rem;
+  }
+  .task-details strong {
+    font-size: 2.2rem;
+  }
+  .task-details p {
+    margin: 0.5rem 0;
+    font-size: 2rem;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  body {
+    font-size: 2rem;
+  }
+  header {
+    font-size: 3rem;
+  }
+  .task-textarea {
+    width: 20rem;
+    font-size: 1rem;
+  }
+  select,
+  input,
+  button {
+    padding: 0.6rem 1.2rem;
+    font-size: 1.2rem;
+  }
+  .task-card {
+    width: 20rem;
+  }
+  .task-details strong {
+    font-size: 1.8rem;
+  }
+  .task-details p {
+    margin: 0.5rem 0;
+    font-size: 1.5rem;
+  }
+  .task-details small {
+    font-size: 1rem;
+  }
 }
