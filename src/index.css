@@ -28,6 +28,35 @@ header > h2 {
   gap: 2rem;
   flex-wrap: wrap;
 }
+.error-message {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  background-color: #ffcdcd;
+  color: #433302;
+  border-left: 5px solid #ffae00;
+
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  border-radius: 0.75rem;
+  font-size: 1.4rem;
+
+  animation: fadeIn 0.3s ease-in-out;
+  box-shadow: 0 2px 8px rgba(255, 174, 0, 0.2);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
 .input-deadline {
   display: flex;
   justify-content: center;

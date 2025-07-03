@@ -9,6 +9,7 @@ export default function ListView({
 }) {
   const [tick, setTick] = useState(0); // dummy state to trigger re-render
 
+  //for getting timely updates to sync tasks
   useEffect(() => {
     const interval = setInterval(() => {
       setTick((prev) => prev + 1);
@@ -17,6 +18,7 @@ export default function ListView({
     return () => clearInterval(interval); // cleanup
   }, []);
 
+  //choosing the ongoing and deadline crossed tasks and filtering based upon time to pass as a prop
   const ongoingTasks = tasks
     .filter(
       (task) =>

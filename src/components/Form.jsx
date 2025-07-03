@@ -4,7 +4,7 @@ export default function Form({ onAddNewTask, onEditTask, edit, taskToEdit }) {
   const [taskTitle, setTaskTitle] = useState("");
   const [taskDescription, setTaskDescription] = useState("");
   const [newDeadline, setNewDeadline] = useState("");
-  const [startDate, setStartDate] = useState(new Date());
+  const [error, setError] = useState("");
   useEffect(() => {
     if (edit) {
       setTaskTitle(taskToEdit.title || "");
@@ -28,10 +28,28 @@ export default function Form({ onAddNewTask, onEditTask, edit, taskToEdit }) {
 
     return `${yyyy}-${mm}-${dd}T${hh}:${min}`;
   }
-
+  //form submission for both adding new tasks and editing existing tasks
   function handleFormSubmission(e) {
     e.preventDefault();
     // console.log(newTask, newDeadline);
+    const missingFields = [];
+
+    if (!taskTitle.trim()) missingFields.push("Title");
+    if (!taskDescription.trim()) missingFields.push("Description");
+    if (!newDeadline.trim()) missingFields.push("Deadline");
+
+    if (missingFields.length > 0) {
+      setError(`⚠️ Please fill: ${missingFields.join(", ")}`);
+
+      // Auto-clear after 5 seconds
+      setTimeout(() => {
+        setError("");
+      }, 5000);
+
+      return;
+    }
+
+    setError("");
     if (edit) {
       const editPayload = {
         ...taskToEdit,
@@ -42,6 +60,8 @@ export default function Form({ onAddNewTask, onEditTask, edit, taskToEdit }) {
       };
       onEditTask(editPayload);
     } else {
+      if (taskTitle === "" || taskDescription === "" || newDeadline === "")
+        return;
       const taskPayload = {
         title: taskTitle,
         description: taskDescription,
@@ -56,6 +76,7 @@ export default function Form({ onAddNewTask, onEditTask, edit, taskToEdit }) {
     setTaskDescription("");
     setNewDeadline("");
   }
+
   return (
     <form className="form-input" onSubmit={handleFormSubmission}>
       <input
@@ -70,7 +91,7 @@ export default function Form({ onAddNewTask, onEditTask, edit, taskToEdit }) {
         value={taskDescription}
         onChange={(e) => setTaskDescription(e.target.value)}
         placeholder="Enter description..."
-        rows={4} // you can adjust this
+        rows={4}
       />
       <div className="input-deadline">
         <input
@@ -81,6 +102,7 @@ export default function Form({ onAddNewTask, onEditTask, edit, taskToEdit }) {
         />
         <button type="submit">{edit ? "Save Changes" : "Add Task"}</button>
       </div>
+      {error && <div className="error-message">{error}</div>}
     </form>
   );
 }

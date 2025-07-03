@@ -3,6 +3,7 @@ import Form from "./components/Form";
 import Header from "./components/Header";
 import ListView from "./components/ListView";
 
+//testing purpose
 const initialTasks = [
   {
     id: 1,
@@ -51,6 +52,7 @@ const initialTasks = [
     updatedAt: "2025-07-02T15:00",
   },
 ];
+//IST conversion function
 function getISTDateTimeTFormat() {
   const now = new Date();
 
@@ -67,19 +69,22 @@ function getISTDateTimeTFormat() {
 
   return `${yyyy}-${mm}-${dd}T${hh}:${min}`;
 }
+
 export default function App() {
-  const [tasks, setTasks] = useState(initialTasks);
+  const [tasks, setTasks] = useState([]);
+  //adding new tasks
   function addNewTask(newTask) {
     var withId = { ...newTask, id: tasks.length + 1 };
     // console.log(withId);
     setTasks([...tasks, withId]);
   }
+  //for editing
   function handleEditTask(editedTask) {
     setTasks((prevTasks) =>
       prevTasks.map((task) => (task.id === editedTask.id ? editedTask : task))
     );
   }
-
+  //for updating completion status
   function onHandleToggleComplete(id) {
     // console.log(id);
     setTasks(
@@ -97,11 +102,16 @@ export default function App() {
       })
     );
   }
+
+  //for removing tasks
   function onRemoveTask(id) {
     setTasks(tasks.filter((task) => task.id !== id));
   }
+  //below two state hooks are for editing tasks, I'm storing that task in a state and passing it to the same form where I'm adding new tasks
   const [edit, setEdit] = useState(false);
   const [taskToEdit, setTaskToEdit] = useState({});
+
+  //creating editing payload
   function handleTaskEditing(id) {
     //find the task with the given id
     const taskToEdit = tasks.find((task) => task.id === id);
@@ -109,6 +119,7 @@ export default function App() {
     setEdit(true);
     setTaskToEdit(taskToEdit);
   }
+
   return (
     <div className="app">
       <Header />
